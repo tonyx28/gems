@@ -23,7 +23,7 @@ In addition, thsi project will include:
 
 This app will be a single screen app with game board, game menu modal, and score board. On the right will be the game menu button and scoreboard. The gameboard will cover the middle and left side.
 
-![wireframe] (docs/gem_collector.png)
+![wireframe](docs/gem_collector.png)
 ## Architecture and Technologies
 
 The project will be implemented with the following technologies:
