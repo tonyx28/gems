@@ -1,43 +1,35 @@
 # Gem Collector
+Gem Collector is simple matching puzzle game from the genre that has brought us hits like Bejeweled, Puzzle Quest, and Candy Crush Saga. It is coded in JavaScript and rendered using HTML5 Canvas.
 
-## Background
+![game][game]
 
-Gem Collector is simple match 3 game from the genre that has brought us hits like Bejeweled, Puzzle Quest, and Candy Crush Saga.
+## Features
+- Game is rendered through canvas with an HTML background.
+- Users can interact with gems using mouse clicks and mouse drag.
+- Score counter tracks points earned by player.
+- New Game button allows player to reset game.
+- AI has been implemented for autoplay using brute force (see below).
+
+```JavaScript
+this.board.findMoves();
+
+if (this.board.moves.length > 0) {
+  let move = this.board.moves[Math.floor(Math.random() * this.board.moves.length)];
+
+  this.swapTiles(move.toCol, move.toRow, move.fromCol, move.fromRow);
+}
+```
+
+## Project Design
+Gem Collector was built in 4 days.
+
+A proposal was drafted to help provide an implementation timeline during the development process.
+
+A [wireframe][wireframe] was prepared along with the design proposal.
 
 
-## Functionaility & MVP
+## Technologies
+Gem Collector is a puzzle game built on JavaScript and HTML5/Canvas. It uses JavaScript to handle the game logic and Canvas to render the tiles, board, score, and buttons. Mouse click event handlers are used to track process user interaction.
 
-In Gem Collector, users will be able to:
-
-- [ ] Start, pause, resume, and quit the game
-- [ ] Select a tile on click to be swapped with a neighboring tile
-
-The game will:
-- [ ] Generate the board randomly
-- [ ] Keep score of collected gems
-
-In addition, thsi project will include:
-- [ ] A production Readme
-
-## Wireframes
-
-This app will be a single screen app with game board, game menu modal, and score board. On the right will be the game menu button and scoreboard. The gameboard will cover the middle and left side.
-
-![wireframe](docs/gem_collector.png)
-## Architecture and Technologies
-
-The project will be implemented with the following technologies:
-
-- Vanilla JavaScript will be used for the overall structure and game logic,
-- HTML5 Canvas for DOM manipulation and rendering,
-- Webpack to bundle and serve up the various scripts.
-
-## Implementation Timeline
-
-**Day 1**: Setup all necessary modules. Create webpack.config.js and package.json. Write a basic entry file.
-
-**Day 2**: Build a render of the board. It should randomize the tiles. Implement the interactive portion of the UI. Users should be able to move a tile around. Game menu should function: start, pause, resume, quit.
-
-**Day 3**: Build the game logic. If 3 or more tiles match, they should be deleted and repopulated with random tiles. Implement the scoreboard to keep track of tiles cleared.
-
-**Day 4**: Style the frontend. Choose a theme and skin the UI.
+[game]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490985549/images/gem.png
+[wireframe]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490984940/images/wireframe.png

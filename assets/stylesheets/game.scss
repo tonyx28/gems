@@ -1,0 +1,19 @@
+.title {
+  color: #7fbfe2;
+  font-size: 50px;
+  font-family: "Latos", sans-serif;
+  margin-bottom: -7%;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+body {
+  background-image: url("../images/1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
