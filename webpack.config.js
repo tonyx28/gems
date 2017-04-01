@@ -2,9 +2,9 @@
 
 module.exports = {
   // context: __dirname,
-  entry: './gem.js',
+  entry: './lib/gem.js',
   output: {
-    filename: './bundle.js'
+    filename: './lib/bundle.js'
   },
 
   devtool: 'source-maps'
