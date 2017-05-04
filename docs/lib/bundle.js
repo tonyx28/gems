@@ -96,8 +96,8 @@ const RESOLVE = "RESOLVE";
 
 class Board {
   constructor(context, game) {
-    this.x = 250;
-    this.y = 113;
+    this.x = 0;
+    this.y = 0;
     this.columns = 8;
     this.rows= 8;
     this.tilewidth= 40;
@@ -281,7 +281,7 @@ class Board {
     for (let i = 0; i < this.columns; i++) {
       for (let j = this.rows-1; j >= 0; j--) {
         if (this.tiles[i][j].type == -1) {
-          this.tiles[i][j].type = this.getRandomTile();
+          this.tiles[i][j].type = this.getRandomTile(); // generate tiles
         } else {
           let shift = this.tiles[i][j].shift;
           if (shift > 0) {
@@ -373,8 +373,8 @@ class Game {
     this.gamestate = INIT;
     this.showmoves = false;
     this.gameover = false;
-    this.buttons = [ { x: 30, y: 240, width: 150, height: 50, text: "New Game"},
-                     { x: 30, y: 300, width: 150, height: 50, text: "Enable AI"}];
+    // this.buttons = [ { x: 30, y: 240, width: 150, height: 50, text: "New Game"},
+                    //  { x: 30, y: 300, width: 150, height: 50, text: "Enable AI"}];
                     // { x: 30, y: 360, width: 150, height: 50, text: "About"}];
     this.animationTime = 0;
     this.animationState = 0;
@@ -386,6 +386,7 @@ class Game {
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
     this.setup();
+    this.time = 180;
   }
 
   setup() {
@@ -399,6 +400,17 @@ class Game {
     this.newGame();
   }
 
+  newGame() {
+    this.score = 0;
+
+    this.gamestate = READY;
+    this.gameover = false;
+
+    this.board.randomize();
+    this.board.findMoves();
+    this.board.findMatches();
+  }
+
   start(time) {
     // console.log(time);
 
@@ -407,6 +419,9 @@ class Game {
     window.requestAnimationFrame(this.start.bind(this));
   }
 
+  timer(){
+
+  }
   update(time) {
     const timeDelta = (time - this.lastTime) / 1000;
     // console.log(timeDelta);
@@ -498,16 +513,16 @@ class Game {
   }
 
   render() {
-    this.context.fillStyle = "#000000";
-    this.context.fillRect(60,this.board.y+13,89,64);
-    this.context.fillStyle = "#7fbfe2";
-    this.context.fillRect(62,this.board.y+15,85,60);
-    this.context.fillStyle = "#000000";
-    this.context.font = "24px Verdana";
-    this.renderText("Score:", 30, this.board.y+40, 150);
-    this.renderText(this.score, 30, this.board.y+70, 150);
+    // this.context.fillStyle = "#000000";
+    // this.context.fillRect(60,this.board.y+13,89,64);
+    // this.context.fillStyle = "#7fbfe2";
+    // this.context.fillRect(62,this.board.y+15,85,60);
+    // this.context.fillStyle = "#000000";
+    // this.context.font = "24px Verdana";
+    // this.renderText("Score:", 30, this.board.y+40, 150);
+    // this.renderText(this.score, 30, this.board.y+70, 150);
 
-    this.renderButtons();
+    // this.renderButtons();
 
     let boardwidth = this.board.columns * this.board.tilewidth;
     let boardheight = this.board.rows * this.board.tileheight;
@@ -547,16 +562,6 @@ class Game {
     }
   }
 
-  newGame() {
-    this.score = 0;
-
-    this.gamestate = READY;
-    this.gameover = false;
-
-    this.board.randomize();
-    this.board.findMoves();
-    this.board.findMatches();
-  }
 
   getMouseTile(pos) {
     let tileX = Math.floor((pos.x - this.board.x) / this.board.tilewidth);

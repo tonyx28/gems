@@ -24,8 +24,8 @@ const RESOLVE = "RESOLVE";
 
 class Board {
   constructor(context, game) {
-    this.x = 250;
-    this.y = 113;
+    this.x = 0;
+    this.y = 0;
     this.columns = 8;
     this.rows= 8;
     this.tilewidth= 40;
@@ -209,7 +209,7 @@ class Board {
     for (let i = 0; i < this.columns; i++) {
       for (let j = this.rows-1; j >= 0; j--) {
         if (this.tiles[i][j].type == -1) {
-          this.tiles[i][j].type = this.getRandomTile();
+          this.tiles[i][j].type = this.getRandomTile(); // generate tiles
         } else {
           let shift = this.tiles[i][j].shift;
           if (shift > 0) {
