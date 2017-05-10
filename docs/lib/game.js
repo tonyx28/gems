@@ -23,7 +23,8 @@ class Game {
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
     this.setup();
-    this.time = 180;
+    this.time = 5;
+    this.timer();
   }
 
   setup() {
@@ -31,7 +32,6 @@ class Game {
     canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
     canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     canvas.addEventListener("mouseout", this.onMouseOut.bind(this));
-
     this.board.createNew();
 
     this.newGame();
@@ -39,13 +39,14 @@ class Game {
 
   newGame() {
     this.score = 0;
-
+    this.time = 180;
     this.gamestate = READY;
     this.gameover = false;
 
     this.board.randomize();
     this.board.findMoves();
     this.board.findMatches();
+
   }
 
   start(time) {
@@ -57,13 +58,20 @@ class Game {
   }
 
   timer(){
-
+    const countdown = setInterval(() => {
+      console.log(this.time);
+      this.time--;
+      if (this.time == 0){
+        this.gameover = true;
+        clearInterval(countdown);
+        console.log("Game Over!");
+      }
+    }, 1000);
   }
   update(time) {
     const timeDelta = (time - this.lastTime) / 1000;
     // console.log(timeDelta);
     this.lastTime = time;
-
     if (this.gamestate == READY) {
       if (this.board.moves.length <= 0) {
         this.gameover = true;
@@ -150,17 +158,6 @@ class Game {
   }
 
   render() {
-    // this.context.fillStyle = "#000000";
-    // this.context.fillRect(60,this.board.y+13,89,64);
-    // this.context.fillStyle = "#7fbfe2";
-    // this.context.fillRect(62,this.board.y+15,85,60);
-    // this.context.fillStyle = "#000000";
-    // this.context.font = "24px Verdana";
-    // this.renderText("Score:", 30, this.board.y+40, 150);
-    // this.renderText(this.score, 30, this.board.y+70, 150);
-
-    // this.renderButtons();
-
     let boardwidth = this.board.columns * this.board.tilewidth;
     let boardheight = this.board.rows * this.board.tileheight;
 
@@ -185,19 +182,19 @@ class Game {
     }
   }
 
-  renderButtons() {
-    for (let i = 0; i < this.buttons.length; i++) {
-      this.context.fillStyle = "#000000";
-      this.context.fillRect(this.buttons[i].x - 2, this.buttons[i].y - 2, this.buttons[i].width + 4, this.buttons[i].height + 4);
-      this.context.fillStyle = "#85b1f7";
-      this.context.fillRect(this.buttons[i].x, this.buttons[i].y, this.buttons[i].width, this.buttons[i].height);
-
-      this.context.fillStyle = "#ffffff";
-      this.context.font = "18px Verdana";
-      let textdim = this.context.measureText(this.buttons[i].text);
-      this.context.fillText(this.buttons[i].text, this.buttons[i].x + (this.buttons[i].width-textdim.width)/2, this.buttons[i].y+30);
-    }
-  }
+  // renderButtons() {
+  //   for (let i = 0; i < this.buttons.length; i++) {
+  //     this.context.fillStyle = "#000000";
+  //     this.context.fillRect(this.buttons[i].x - 2, this.buttons[i].y - 2, this.buttons[i].width + 4, this.buttons[i].height + 4);
+  //     this.context.fillStyle = "#85b1f7";
+  //     this.context.fillRect(this.buttons[i].x, this.buttons[i].y, this.buttons[i].width, this.buttons[i].height);
+  //
+  //     this.context.fillStyle = "#ffffff";
+  //     this.context.font = "18px Verdana";
+  //     let textdim = this.context.measureText(this.buttons[i].text);
+  //     this.context.fillText(this.buttons[i].text, this.buttons[i].x + (this.buttons[i].width-textdim.width)/2, this.buttons[i].y+30);
+  //   }
+  // }
 
 
   getMouseTile(pos) {
