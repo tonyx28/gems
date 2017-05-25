@@ -7,4 +7,13 @@ document.addEventListener("DOMContentLoaded", function(){
   const ctx = canvasEl.getContext("2d");
   const game = new Game(ctx);
   game.start(0);
+
+  $(".new-game-btn").click(() => {
+    const game = new Game(ctx);
+    game.start(0);
+  })
+
+  $(".demo-btn").click(() => {
+    game.toggleDemo();
+  })
 })

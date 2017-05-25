@@ -3,17 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title>Gem Collector!</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="lib/bundle.js"></script>
     <link rel="stylesheet" href="assets/stylesheets/game.css"></link>
 
   </head>
   <body class="background">
-    <div class="game">
+    <div class="main">
       <h1 class="title">Gem Collectors!</h1>
-      <div class="canvas-container">
-        <canvas id="canvas" width=320 height=320></canvas>
+      <div class="game">
+        <div class="left-container">
+          <div class="time-box">
+            <h3>Time</h3>
+            <div id="time"></div>
+          </div>
+          <button class="new-game-btn">New Game</button>
+          <button id="demo-btn" class="demo-btn">Demo</button>
+          <button class="about-btn">About</button>
+        </div>
+        <div class="canvas-container">
+          <canvas id="canvas" width=320 height=320></canvas>
+        </div>
+        <div class="right-container">
+          <div class="score-box">
+            <h3>Score</h3>
+            <div id="score"></div>
+          </div>
+        </div>
       </div>
-    <div>
+    </div>
   </body>
 </html>

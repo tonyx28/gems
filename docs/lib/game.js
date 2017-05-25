@@ -10,20 +10,17 @@ class Game {
     this.gamestate = INIT;
     this.showmoves = false;
     this.gameover = false;
-    // this.buttons = [ { x: 30, y: 240, width: 150, height: 50, text: "New Game"},
-                    //  { x: 30, y: 300, width: 150, height: 50, text: "Enable AI"}];
-                    // { x: 30, y: 360, width: 150, height: 50, text: "About"}];
     this.animationTime = 0;
     this.animationState = 0;
     this.animationTimetotal = 0.3;
-    this.ai = false;
+    this.demo = false;
     this.score = 0;
     this.context = context;
     this.board = new Board(this.context, this);
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
     this.setup();
-    this.time = 5;
+    this.time = 180;
     this.timer();
   }
 
@@ -46,38 +43,38 @@ class Game {
     this.board.randomize();
     this.board.findMoves();
     this.board.findMatches();
-
   }
 
   start(time) {
-    // console.log(time);
-
     this.update(time);
     this.render();
     window.requestAnimationFrame(this.start.bind(this));
   }
 
+  toggleDemo() {
+    this.demo = !this.demo;
+  }
+
   timer(){
     const countdown = setInterval(() => {
-      console.log(this.time);
       this.time--;
       if (this.time == 0){
         this.gameover = true;
         clearInterval(countdown);
-        console.log("Game Over!");
       }
     }, 1000);
   }
+
   update(time) {
     const timeDelta = (time - this.lastTime) / 1000;
-    // console.log(timeDelta);
+
     this.lastTime = time;
     if (this.gamestate == READY) {
       if (this.board.moves.length <= 0) {
         this.gameover = true;
       }
 
-      if (this.ai) {
+      if (this.demo && !this.gameover) {
         this.animationTime += timeDelta;
         if (this.animationTime > this.animationTimetotal) {
           this.board.findMoves();
@@ -158,6 +155,9 @@ class Game {
   }
 
   render() {
+    this.renderScore();
+    this.renderTime();
+
     let boardwidth = this.board.columns * this.board.tilewidth;
     let boardheight = this.board.rows * this.board.tileheight;
 
@@ -182,20 +182,21 @@ class Game {
     }
   }
 
-  // renderButtons() {
-  //   for (let i = 0; i < this.buttons.length; i++) {
-  //     this.context.fillStyle = "#000000";
-  //     this.context.fillRect(this.buttons[i].x - 2, this.buttons[i].y - 2, this.buttons[i].width + 4, this.buttons[i].height + 4);
-  //     this.context.fillStyle = "#85b1f7";
-  //     this.context.fillRect(this.buttons[i].x, this.buttons[i].y, this.buttons[i].width, this.buttons[i].height);
-  //
-  //     this.context.fillStyle = "#ffffff";
-  //     this.context.font = "18px Verdana";
-  //     let textdim = this.context.measureText(this.buttons[i].text);
-  //     this.context.fillText(this.buttons[i].text, this.buttons[i].x + (this.buttons[i].width-textdim.width)/2, this.buttons[i].y+30);
-  //   }
-  // }
+  renderScore() {
+    document.getElementById("score").innerHTML = this.score;
+  }
 
+  renderTime() {
+    document.getElementById("time").innerHTML = this.formatTime(this.time);
+  }
+
+  formatTime(time) {
+    let mins = parseInt(time / 60)
+    let secs = time % 60
+    secs = secs < 10 ? `0${secs}` : secs
+
+    return `${mins}:${secs}`
+  }
 
   getMouseTile(pos) {
     let tileX = Math.floor((pos.x - this.board.x) / this.board.tilewidth);
@@ -250,7 +251,7 @@ class Game {
   onMouseDown(e) {
     let pos = this.getMousePos(canvas, e);
 
-    if (!this.drag) {
+    if (!this.drag && !this.gameover) {
       this.mousetarget = this.getMouseTile(pos);
 
       if (this.mousetarget.valid) {
@@ -278,20 +279,6 @@ class Game {
       this.drag = true;
     }
 
-
-    for (let i = 0; i < this.buttons.length; i++) {
-      if (pos.x >= this.buttons[i].x && pos.x < this.buttons[i].x + this.buttons[i].width &&
-          pos.y >= this.buttons[i].y && pos.y < this.buttons[i].y + this.buttons[i].height) {
-        if (i == 0) {
-          this.newGame();
-        } else if (i == 1) {
-          this.ai = !this.ai;
-          this.buttons[i].text = (this.ai?"Disable":"Enable") + " AI";
-        } else if (i == 2) {
-          // for about button
-        }
-      }
-    }
   }
 
   onMouseUp(e) {
