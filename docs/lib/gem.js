@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   const game = new Game(ctx);
   game.start(0);
+  game.pause();
 
   aboutButton.onclick = () => {
     modal.style.display = "block";

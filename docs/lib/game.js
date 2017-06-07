@@ -61,7 +61,6 @@ class Game {
     this.time = 180;
     this.setup();
     this.timer();
-    this.pause();
   }
 
   start(time) {
@@ -89,7 +88,9 @@ class Game {
   }
 
   unpause() {
-    this.timer();
+    if (this.gameover == false){
+      this.timer();
+    }
   }
 
   update(time) {
