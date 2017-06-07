@@ -424,7 +424,7 @@ class Game {
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
     this.time = 180;
     this.setup();
-    this.timer();
+    // this.timer();
   }
 
   start(time) {
