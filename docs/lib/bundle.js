@@ -382,9 +382,10 @@ class Game {
     this.board = new Board(this.context, this);
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
-    this.setup();
     this.time = 180;
-    this.timer();
+    this.countdown;
+    this.setup();
+    // this.timer();
   }
 
   setup() {
@@ -398,14 +399,32 @@ class Game {
   }
 
   newGame() {
-    this.score = 0;
-    this.time = 180;
     this.gamestate = READY;
-    this.gameover = false;
 
     this.board.randomize();
     this.board.findMoves();
     this.board.findMatches();
+    this.render();
+  }
+
+  resetGame() {
+    this.lastTime = 0;
+    this.drag = false;
+    this.gamestate = INIT;
+    this.showmoves = false;
+    this.gameover = false;
+    this.animationTime = 0;
+    this.animationState = 0;
+    this.animationTimetotal = 0.3;
+    this.demo = false;
+    this.score = 0;
+    this.board = new Board(this.context, this);
+    this.mousetarget = { valid: false, x: 0, y: 0 };
+    this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
+    this.time = 180;
+    this.setup();
+    this.timer();
+    this.pause();
   }
 
   start(time) {
@@ -415,17 +434,25 @@ class Game {
   }
 
   toggleDemo() {
-    this.demo = !this.demo;
+    this.demo = !this.demo
   }
 
-  timer(){
-    const countdown = setInterval(() => {
+  timer() {
+    this.countdown = setInterval(() => {
       this.time--;
       if (this.time == 0){
         this.gameover = true;
-        clearInterval(countdown);
+        clearInterval(this.countdown);
       }
     }, 1000);
+  }
+
+  pause() {
+    clearInterval(this.countdown);
+  }
+
+  unpause() {
+    this.timer();
   }
 
   update(time) {
@@ -444,7 +471,6 @@ class Game {
 
           if (this.board.moves.length > 0) {
             let move = this.board.moves[Math.floor(Math.random() * this.board.moves.length)];
-
             this.swapTiles(move.toCol, move.toRow, move.fromCol, move.fromRow);
           }
           this.animationTime = 0;
@@ -673,21 +699,45 @@ module.exports = Game;
 const Game = __webpack_require__(1);
 const Board = __webpack_require__(0);
 
+
 document.addEventListener("DOMContentLoaded", function(){
   const canvasEl = document.getElementById("canvas");
-
   const ctx = canvasEl.getContext("2d");
+
+  const modal = document.getElementById('about-modal');
+  const aboutButton = document.getElementById('about-btn');
+  const span = document.getElementsByClassName("close")[0];
+  const demoButton = document.getElementById('demo-btn');
+  const newGameButton = document.getElementById('new-game-btn');
+
   const game = new Game(ctx);
   game.start(0);
 
-  $(".new-game-btn").click(() => {
-    const game = new Game(ctx);
-    game.start(0);
-  })
+  aboutButton.onclick = () => {
+    modal.style.display = "block";
+    game.pause();
+  }
 
-  $(".demo-btn").click(() => {
+  span.onclick = () => {
+    modal.style.display = "none";
+    game.unpause();
+  }
+
+  window.onclick = () => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      game.unpause();
+    }
+  }
+
+  newGameButton.onclick = () => {
+    game.resetGame();
+    game.start(0);
+  }
+
+  demoButton.onclick = () => {
     game.toggleDemo();
-  })
+  }
 })
 
 

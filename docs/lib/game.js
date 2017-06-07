@@ -20,8 +20,9 @@ class Game {
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
     this.time = 180;
+    this.countdown;
     this.setup();
-    this.timer();
+    // this.timer();
   }
 
   setup() {
@@ -40,6 +41,7 @@ class Game {
     this.board.randomize();
     this.board.findMoves();
     this.board.findMatches();
+    this.render();
   }
 
   resetGame() {
@@ -58,6 +60,8 @@ class Game {
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
     this.time = 180;
     this.setup();
+    this.timer();
+    this.pause();
   }
 
   start(time) {
@@ -70,14 +74,22 @@ class Game {
     this.demo = !this.demo
   }
 
-  timer(){
-    const countdown = setInterval(() => {
+  timer() {
+    this.countdown = setInterval(() => {
       this.time--;
       if (this.time == 0){
         this.gameover = true;
-        clearInterval(countdown);
+        clearInterval(this.countdown);
       }
     }, 1000);
+  }
+
+  pause() {
+    clearInterval(this.countdown);
+  }
+
+  unpause() {
+    this.timer();
   }
 
   update(time) {

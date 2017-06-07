@@ -1,32 +1,34 @@
 const Game = require("./game");
 const Board = require("./board.js");
 
+
 document.addEventListener("DOMContentLoaded", function(){
   const canvasEl = document.getElementById("canvas");
-
   const ctx = canvasEl.getContext("2d");
+
+  const modal = document.getElementById('about-modal');
+  const aboutButton = document.getElementById('about-btn');
+  const span = document.getElementsByClassName("close")[0];
+  const demoButton = document.getElementById('demo-btn');
+  const newGameButton = document.getElementById('new-game-btn');
+
   const game = new Game(ctx);
   game.start(0);
 
-  // var
-  var modal = document.getElementById('about-modal');
-  var aboutButton = document.getElementById('about-btn');
-  var span = document.getElementsByClassName("close")[0];
-  var demoButton = document.getElementById('demo-btn');
-  var newGameButton = document.getElementById('new-game-btn');
-
-
   aboutButton.onclick = () => {
     modal.style.display = "block";
+    game.pause();
   }
 
   span.onclick = () => {
     modal.style.display = "none";
+    game.unpause();
   }
 
   window.onclick = () => {
     if (event.target == modal) {
       modal.style.display = "none";
+      game.unpause();
     }
   }
 
@@ -38,6 +40,4 @@ document.addEventListener("DOMContentLoaded", function(){
   demoButton.onclick = () => {
     game.toggleDemo();
   }
-
-
 })
