@@ -14,7 +14,7 @@
 
 .modal-content {
   position: relative;
-  background-color: #fefefe;
+  background-color: #a0c2f8;
   margin: auto;
   padding: 0;
   border: 1px solid #888;
@@ -52,8 +52,9 @@
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #71a3f4;
     color: white;
+    text-shadow: 1px 1px grey;
 }
 
 .modal-body {
@@ -62,6 +63,11 @@
 
 .modal-footer {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #71a3f4;
     color: white;
+    text-shadow: 1px 1px grey;
+}
+
+#demo-gif {
+  border: 2px solid black;
 }
