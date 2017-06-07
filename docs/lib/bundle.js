@@ -366,7 +366,7 @@ const READY = "READY";
 const INIT = "INIT";
 const RESOLVE = "RESOLVE";
 const PAUSE = "PAUSE";
-const TIME_LIMIT = 10;
+const TIME_LIMIT = 180;
 
 class Game {
   constructor(context) {
