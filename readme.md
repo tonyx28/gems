@@ -33,3 +33,6 @@ Gem Collector is a puzzle game built on JavaScript and HTML5/Canvas. It uses Jav
 
 [game]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490985549/images/gem.png
 [wireframe]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490984940/images/wireframe.png
+
+## Future Implementations
+Add a highscore modal that tracks top scores.
