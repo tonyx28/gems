@@ -8,7 +8,7 @@ Gem Collector is simple matching puzzle game from the genre that has brought us 
 - Users can interact with gems using mouse clicks and mouse drag.
 - Score counter tracks points earned by player.
 - New Game button allows player to reset game.
-- AI has been implemented for autoplay. It finds available moves then selects one at random to perform (see below).
+- Demo mode has been implemented for autoplay. It finds available moves then selects one at random to perform (see below).
 
 ```JavaScript
 this.board.findMoves();

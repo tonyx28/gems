@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Gem Collector!</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="lib/bundle.js"></script>
     <link rel="stylesheet" href="assets/stylesheets/game.css"></link>
+    <link rel="stylesheet" href="assets/stylesheets/modal.css"></link>
 
   </head>
   <body class="background">
@@ -17,9 +17,9 @@
             <h3>Time</h3>
             <div id="time"></div>
           </div>
-          <button class="new-game-btn">New Game</button>
+          <button id="new-game-btn" class="new-game-btn">New Game</button>
           <button id="demo-btn" class="demo-btn">Demo</button>
-          <button class="about-btn">About</button>
+          <button id="about-btn" class="about-btn">About</button>
         </div>
         <div class="canvas-container">
           <canvas id="canvas" width=320 height=320></canvas>
@@ -29,6 +29,11 @@
             <h3>Score</h3>
             <div id="score"></div>
           </div>
+        </div>
+        <div id="about-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
         </div>
       </div>
     </div>

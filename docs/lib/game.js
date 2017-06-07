@@ -19,8 +19,8 @@ class Game {
     this.board = new Board(this.context, this);
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
-    this.setup();
     this.time = 180;
+    this.setup();
     this.timer();
   }
 
@@ -35,14 +35,29 @@ class Game {
   }
 
   newGame() {
-    this.score = 0;
-    this.time = 180;
     this.gamestate = READY;
-    this.gameover = false;
 
     this.board.randomize();
     this.board.findMoves();
     this.board.findMatches();
+  }
+
+  resetGame() {
+    this.lastTime = 0;
+    this.drag = false;
+    this.gamestate = INIT;
+    this.showmoves = false;
+    this.gameover = false;
+    this.animationTime = 0;
+    this.animationState = 0;
+    this.animationTimetotal = 0.3;
+    this.demo = false;
+    this.score = 0;
+    this.board = new Board(this.context, this);
+    this.mousetarget = { valid: false, x: 0, y: 0 };
+    this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
+    this.time = 180;
+    this.setup();
   }
 
   start(time) {
@@ -52,7 +67,7 @@ class Game {
   }
 
   toggleDemo() {
-    this.demo = !this.demo;
+    this.demo = !this.demo
   }
 
   timer(){
@@ -81,7 +96,6 @@ class Game {
 
           if (this.board.moves.length > 0) {
             let move = this.board.moves[Math.floor(Math.random() * this.board.moves.length)];
-
             this.swapTiles(move.toCol, move.toRow, move.fromCol, move.fromRow);
           }
           this.animationTime = 0;
