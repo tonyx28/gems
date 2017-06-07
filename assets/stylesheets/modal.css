@@ -71,3 +71,8 @@
 #demo-gif {
   border: 2px solid black;
 }
+
+.demo-gif {
+  display: flex;
+  justify-content: center;
+}
