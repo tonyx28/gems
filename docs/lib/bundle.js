@@ -424,7 +424,6 @@ class Game {
     this.time = 180;
     this.setup();
     this.timer();
-    this.pause();
   }
 
   start(time) {
@@ -452,7 +451,9 @@ class Game {
   }
 
   unpause() {
-    this.timer();
+    if (this.gameover == false){
+      this.timer();
+    }
   }
 
   update(time) {
@@ -712,6 +713,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   const game = new Game(ctx);
   game.start(0);
+  game.pause();
 
   aboutButton.onclick = () => {
     modal.style.display = "block";
