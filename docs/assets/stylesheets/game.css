@@ -5,17 +5,17 @@
 }
 
 .title {
+  /*color: #85b1f7;*/
   color: #7fbfe2;
   font-size: 50px;
   font-family: "Latos", sans-serif;
-  text-shadow: 1px #000;
+  text-shadow: 2px 2px grey;
 }
 
 .game {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /*align-items: center;*/
 }
 
 .left-container {
@@ -24,6 +24,11 @@
   justify-content: space-around;
 }
 
+.right-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .canvas-container {
   margin: 0 50px 0 50px;
   border: 2px solid #000;
@@ -42,7 +47,7 @@ button {
   font-size: 20px;
   color: #fff;
   background-color: #85b1f7;
-
+  text-shadow: 1px 1px black;
 }
 
 button:hover {
@@ -58,6 +63,9 @@ button:hover {
   font-size: 24px;
   color: #fff;
   margin-top: 10px;
+  border-color: #000;
+  box-shadow: 0 0 0 2px #85b1f7, 0 0 0 5px #ddd, 0 0 0 10px #85b1f7, 0 0 2px 10px #eee;
+  text-shadow: 1px 1px grey;
 }
 
 .time-box {
@@ -68,9 +76,14 @@ button:hover {
   text-align: center;
   font-size: 24px;
   color: #fff;
-  /*margin: 10px;*/
+  box-shadow: 0 0 0 2px #85b1f7, 0 0 0 5px #ddd, 0 0 0 10px #85b1f7, 0 0 2px 10px #eee;
+  text-shadow: 1px 1px grey;
 }
 
 h3 {
   margin: 5px;
+}
+
+#gems-bag {
+  width: 150px;
 }
