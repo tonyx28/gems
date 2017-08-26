@@ -2,6 +2,7 @@ const Board = require("./board");
 const READY = "READY";
 const INIT = "INIT";
 const RESOLVE = "RESOLVE";
+const PAUSE = "PAUSE";
 
 class Game {
   constructor(context) {
@@ -84,10 +85,12 @@ class Game {
   }
 
   pause() {
+    this.gamestate = PAUSE;
     clearInterval(this.countdown);
   }
 
   unpause() {
+    this.gamestate = READY;
     if (this.gameover == false){
       this.timer();
     }
