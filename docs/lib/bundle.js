@@ -366,6 +366,7 @@ const READY = "READY";
 const INIT = "INIT";
 const RESOLVE = "RESOLVE";
 const PAUSE = "PAUSE";
+const TIME_LIMIT = 10;
 
 class Game {
   constructor(context) {
@@ -383,10 +384,9 @@ class Game {
     this.board = new Board(this.context, this);
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
-    this.time = 180;
+    this.time = TIME_LIMIT;
     this.countdown;
     this.setup();
-    // this.timer();
   }
 
   setup() {
@@ -422,9 +422,11 @@ class Game {
     this.board = new Board(this.context, this);
     this.mousetarget = { valid: false, x: 0, y: 0 };
     this.currentMove = { toCol: 0, toRow: 0, fromCol: 0, fromRow: 0 };
-    this.time = 180;
-    this.setup();
-    // this.timer();
+    this.time = TIME_LIMIT;
+    this.board.createNew();
+    this.newGame();
+    clearInterval(this.countdown);
+    this.timer();
   }
 
   start(time) {
