@@ -29,9 +29,9 @@ A [wireframe][wireframe] was prepared along with the design proposal.
 
 
 ## Technologies
-Gem Collector is a puzzle game built on JavaScript and HTML5/Canvas. It uses JavaScript to handle the game logic and Canvas to render the tiles, board, score, and buttons. Mouse click event handlers are used to track process user interaction.
+Gem Collector is a puzzle game built on JavaScript and HTML5/Canvas. It uses JavaScript to handle the game logic and Canvas to render the tiles and game board. Buttons, score board, and timer are rendered using HTML5. Mouse click event handlers are used to track process user interaction.
 
-[game]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490985549/images/gem.png
+[game]: https://res.cloudinary.com/dogzxn5h4/image/upload/v1496832610/Screenshot3_btvn9m.png
 [wireframe]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490984940/images/wireframe.png
 
 ## Future Implementations
