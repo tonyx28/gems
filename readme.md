@@ -1,7 +1,7 @@
 # Gem Collector
-Gem Collector is simple matching puzzle game from the genre that has brought us hits like Bejeweled, Puzzle Quest, and Candy Crush Saga. It is coded in JavaScript and rendered using HTML5 Canvas.
+Gem Collector is simple matching puzzle game from the genre that has brought us hits like Bejeweled, Puzzle Quest, and Candy Crush Saga. It is coded in JavaScript and rendered using HTML5 Canvas. Play it [here][live].
 
-![game][game]
+![game][game]Â
 
 ## Features
 - Game is rendered through canvas with an HTML background.
@@ -33,6 +33,7 @@ Gem Collector is a puzzle game built on JavaScript and HTML5/Canvas. It uses Jav
 
 [game]: https://res.cloudinary.com/dogzxn5h4/image/upload/v1496832610/Screenshot3_btvn9m.png
 [wireframe]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1490984940/images/wireframe.png
+[live]: https://tonyx28.github.io/gems/
 
 ## Future Implementations
 Add a highscore modal that tracks top scores.
